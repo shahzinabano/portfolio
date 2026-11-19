@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# raw source files (large) - processed into /public by `npm run assets`
+/source-assets/**/*.pdf
+/source-assets/**/thumbnail.png

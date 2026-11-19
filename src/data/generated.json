@@ -1,0 +1,332 @@
+{
+  "caseStudies": {
+    "marjan": {
+      "pages": [
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        }
+      ],
+      "thumb": {
+        "w": 1600,
+        "h": 935
+      }
+    },
+    "nomora": {
+      "pages": [
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        }
+      ],
+      "thumb": {
+        "w": 1600,
+        "h": 935
+      }
+    },
+    "oralease": {
+      "pages": [
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 419,
+          "slice": true
+        }
+      ],
+      "thumb": {
+        "w": 1600,
+        "h": 936
+      }
+    },
+    "tech-canvas": {
+      "pages": [],
+      "thumb": null
+    },
+    "vertix": {
+      "pages": [
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        },
+        {
+          "w": 2200,
+          "h": 1238,
+          "slice": false
+        }
+      ],
+      "thumb": {
+        "w": 1600,
+        "h": 935
+      }
+    }
+  },
+  "work": [
+    {
+      "src": "/work/1.webp",
+      "w": 1400,
+      "h": 1675
+    },
+    {
+      "src": "/work/2.webp",
+      "w": 1400,
+      "h": 1675
+    },
+    {
+      "src": "/work/3.webp",
+      "w": 1400,
+      "h": 1675
+    },
+    {
+      "src": "/work/4.webp",
+      "w": 1400,
+      "h": 1675
+    },
+    {
+      "src": "/work/5.webp",
+      "w": 1400,
+      "h": 1675
+    }
+  ],
+  "hero": {
+    "src": "/hero/bano.webp",
+    "w": 1200,
+    "h": 1464
+  },
+  "about": {
+    "src": "/about/bano.webp",
+    "w": 1200,
+    "h": 1464
+  }
+}

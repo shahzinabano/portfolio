@@ -1,0 +1,118 @@
+.wrap { padding-top: clamp(80px, 12vh, 140px); padding-bottom: clamp(100px, 16vh, 180px); }
+.top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: clamp(40px, 7vh, 80px); }
+.title { font-size: clamp(64px, 10.5vw, 180px); }
+.title :global(.serif) { font-weight: 400; }
+
+.grid { display: grid; grid-template-columns: minmax(240px, 0.8fr) 2fr; gap: clamp(28px, 5vw, 90px); align-items: start; }
+.cardCol { position: sticky; top: 90px; perspective: 900px; }
+.card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 14px;
+  overflow: hidden;
+  background: radial-gradient(90% 70% at 50% 30%, #d9d8d3 0%, #9c9b96 60%, #6b6a66 100%);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.card img { position: absolute; inset: auto 0 0 0; width: 100%; height: 90%; object-fit: contain; object-position: bottom; filter: grayscale(1) contrast(1.05); transition: transform 1.2s var(--ease); }
+.card:hover img { transform: scale(1.04); }
+.cardMeta {
+  position: absolute;
+  inset: 14px 14px auto 14px;
+  display: flex;
+  justify-content: space-between;
+  color: #1a1a1a;
+}
+
+.statement {
+  font-size: clamp(26px, 3.3vw, 54px);
+  line-height: 1.06;
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+.word { display: inline; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: clamp(48px, 8vh, 90px) 0;
+  border-top: 1px solid var(--line);
+}
+.stat { display: flex; flex-direction: column; gap: 8px; padding-top: 18px; }
+.statValue { font-size: clamp(48px, 6vw, 104px); }
+
+.lists { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; }
+.listTitle { margin-bottom: 12px; font-weight: 400; }
+.list { list-style: none; }
+.list li {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: clamp(16px, 1.35vw, 21px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  transition: padding 0.5s var(--ease), color 0.3s;
+}
+.list li:hover { padding-left: 10px; }
+
+@media (max-width: 860px) {
+  .grid { grid-template-columns: 1fr; }
+  .cardCol { position: relative; top: 0; max-width: 340px; }
+  .lists { grid-template-columns: 1fr; }
+  .top :global(.mono) { display: none; }
+}
+
+.suffix { font-size: 0.42em; font-weight: 400; letter-spacing: -0.02em; margin-left: 0.08em; }
+.edu { display: grid !important; grid-template-columns: 1fr auto; gap: 2px 16px; }
+.edu > span:first-child { grid-column: 1; }
+.edu > span:nth-child(2) { grid-column: 1; font-size: 0.78em; }
+.edu > span:nth-child(3) { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+.lang { display: grid !important; grid-template-columns: 1fr auto; gap: 10px 16px; }
+.meter { grid-column: 1 / -1; height: 2px; background: var(--line); overflow: hidden; }
+.meter > span { display: block; height: 100%; background: var(--fg); transform-origin: left; }
+
+/* skills as pills */
+.skills { display: flex; flex-direction: column; margin-bottom: clamp(48px, 8vh, 90px); border-top: 1px solid var(--line); }
+.skillRow {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+.skillTitle { font-weight: 400; padding-top: 11px; display: flex; gap: 10px; }
+.skillTitle span { color: var(--dim); }
+.pills { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.pills li {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 9px 16px;
+  border-radius: 99px;
+  box-shadow: inset 0 0 0 1px var(--dim);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  cursor: default;
+  transition: color 0.45s var(--ease), box-shadow 0.45s;
+}
+.pills li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--fg);
+  border-radius: inherit;
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease);
+}
+.pills li:hover { color: var(--bg); box-shadow: inset 0 0 0 1px var(--fg); }
+.pills li:hover::before { transform: none; }
+@media (max-width: 760px) {
+  .skillRow { grid-template-columns: 1fr; gap: 10px; }
+  .skillTitle { padding-top: 0; }
+}

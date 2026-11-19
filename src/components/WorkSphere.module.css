@@ -1,0 +1,89 @@
+.wrap {
+  height: 100svh;
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+}
+.years {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 64px;
+}
+.yearsBig { font-size: clamp(18px, 1.6vw, 24px); font-weight: 500; letter-spacing: -0.04em; color: var(--muted); }
+
+.stage {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  overflow: hidden;
+}
+.stage:active { cursor: grabbing; }
+.title {
+  position: relative;
+  z-index: 100;
+  font-size: clamp(90px, 15vw, 240px);
+  pointer-events: none;
+  text-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
+}
+.origin { position: absolute; left: 50%; top: 50%; width: 0; height: 0; perspective: 900px; }
+.card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  aspect-ratio: 1672 / 2000;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  will-change: transform, opacity;
+  transition: box-shadow 0.4s;
+  cursor: pointer;
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  pointer-events: none;
+  filter: grayscale(1) contrast(1.06) brightness(0.92);
+  transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+}
+.card:hover img, .card:focus-visible img { transform: scale(1.08); filter: none; }
+.card:hover { box-shadow: 0 0 0 1px var(--fg), 0 20px 60px rgba(0, 0, 0, 0.6); }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 28px;
+  min-height: 60px;
+}
+.hoverTitle { text-align: right; }
+
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 75;
+  background: rgba(8, 8, 8, 0.94);
+  backdrop-filter: blur(14px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 16px var(--gutter) 22px;
+}
+.lbTop, .lbBottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.lbTop { padding-right: 90px; }
+.lbFig {
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 18px 0;
+}
+.lbFig img { max-height: calc(100svh - 150px); width: auto; max-width: 100%; border-radius: 8px; object-fit: contain; }
+.lbCaption { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.lbTitle { font-size: 20px; font-weight: 600; letter-spacing: -0.04em; }
