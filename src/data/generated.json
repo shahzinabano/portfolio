@@ -185,8 +185,42 @@
       }
     },
     "tech-canvas": {
-      "pages": [],
-      "thumb": null
+      "pages": [
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 1650,
+          "slice": true
+        },
+        {
+          "w": 2200,
+          "h": 597,
+          "slice": true
+        }
+      ],
+      "thumb": {
+        "w": 1600,
+        "h": 936
+      }
     },
     "vertix": {
       "pages": [
