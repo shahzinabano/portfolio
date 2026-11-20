@@ -176,7 +176,7 @@ export const disciplines = [
     no: "02",
     title: "Develop",
     line: "Responsive sites that feel as good as they look.",
-    skills: ["React.js", "Next.js", "TypeScript", "WordPress", "Elementor", "HTML Email", "Custom Web Dev"],
+    skills: ["React.js", "Next.js", "TypeScript", "Python", "WordPress", "Elementor", "HTML Email", "Custom Web Dev"],
   },
   {
     key: "market",
