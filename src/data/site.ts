@@ -73,11 +73,12 @@ const caseMeta: Omit<CaseStudy, "thumb" | "pages">[] = [
   {
     slug: "tech-canvas",
     title: "Tech Canvas",
-    client: "Tech Canvas",
-    industry: "Technology",
-    deliverable: "Case Study",
+    client: "The Tech Canvas",
+    industry: "ERP · Odoo",
+    deliverable: "Website Design & Development",
     year: "2026",
-    summary: "The full case study is being prepared and lands here very soon.",
+    summary:
+      "A website for an Odoo ERP partner — turning a complex product into a clear story for trading, retail and e-commerce businesses, with a bold blue system across desktop and mobile.",
     accent: "#5b5bf0",
   },
   {
