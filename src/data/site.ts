@@ -60,6 +60,17 @@ export type CaseStudy = {
 
 const caseMeta: Omit<CaseStudy, "thumb" | "pages">[] = [
   {
+    slug: "dancing-puppet",
+    title: "Dancing Puppet",
+    client: "Dancing Puppet",
+    industry: "Online D&D · Entertainment",
+    deliverable: "Email Campaign & Newsletters",
+    year: "2026",
+    summary:
+      "\"Into the Mists\" — a four-email welcome sequence for live, online Dungeons & Dragons. From the first hello to a booked seat: the world, the storytellers, a first night for beginners, and the Count's last call.",
+    accent: "#7a1416",
+  },
+  {
     slug: "oralease",
     title: "OralEase",
     client: "OralEase",
