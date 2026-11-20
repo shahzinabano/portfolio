@@ -46,8 +46,11 @@ for (const slug of fs.existsSync(csDir) ? fs.readdirSync(csDir) : []) {
   const target = path.join(pub, "case-studies", slug);
   const files = fs.readdirSync(dir);
   const thumb = files.find((f) => /^thumb/i.test(f) && IMG.test(f));
-  const pdf = files.find((f) => f.toLowerCase().endsWith(".pdf"));
-  if (!thumb && !pdf) {
+  // pages can be one PDF, several PDFs, or images (e.g. 1.pdf … 6.pdf or 1.png … 6.png).
+  // They are used in natural name order, so 2 comes before 10.
+  const natural = (x, y) => x.localeCompare(y, undefined, { numeric: true, sensitivity: "base" });
+  const sources = files.filter((f) => /\.pdf$/i.test(f) || (IMG.test(f) && !/^thumb/i.test(f))).sort(natural);
+  if (!thumb && !sources.length) {
     console.log(`case study ${slug}: no new files, kept as is`);
     continue;
   }
@@ -58,36 +61,48 @@ for (const slug of fs.existsSync(csDir) ? fs.readdirSync(csDir) : []) {
     entry.thumb = await toWebp(path.join(dir, thumb), path.join(target, "thumb.webp"), 1600);
   }
 
-  if (pdf) {
+  if (sources.length) {
     // replace the old pages of this case study only
     for (const f of fs.readdirSync(target)) if (/^page-\d+\.webp$/.test(f)) fs.rmSync(path.join(target, f));
     entry.pages = [];
-    const hadThumb = Boolean(thumb);
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `cs-${slug}-`));
-    execFileSync("pdftoppm", ["-scale-to-x", "2200", "-scale-to-y", "-1", "-png", path.join(dir, pdf), path.join(tmp, "p")]);
-    const pages = fs.readdirSync(tmp).filter((f) => f.endsWith(".png")).sort();
+
+    // 1) turn every source into full-width page images, in order
+    const pages = [];
+    for (const [i, f] of sources.entries()) {
+      if (/\.pdf$/i.test(f)) {
+        const prefix = path.join(tmp, `s${String(i).padStart(3, "0")}`);
+        execFileSync("pdftoppm", ["-scale-to-x", "2200", "-scale-to-y", "-1", "-png", path.join(dir, f), prefix]);
+        const base = path.basename(prefix);
+        pages.push(...fs.readdirSync(tmp).filter((p) => p.startsWith(`${base}-`) && p.endsWith(".png")).sort(natural).map((p) => path.join(tmp, p)));
+      } else {
+        pages.push(path.join(dir, f));
+      }
+    }
+
+    // 2) write them out at 2200px wide; very tall pages are cut into seamless slices
     let n = 0;
-    for (const page of pages) {
-      const file = path.join(tmp, page);
-      const meta = await sharp(file, { limitInputPixels: false }).metadata();
-      // very tall pages (long-scroll layouts) are cut into seamless slices so they lazy-load
+    for (const file of pages) {
+      const img = await sharp(file, { limitInputPixels: false }).resize({ width: 2200 }).png().toBuffer();
+      const meta = await sharp(img, { limitInputPixels: false }).metadata();
       const sliceH = meta.height / meta.width > 2 ? Math.round(meta.width * 0.75) : meta.height;
       for (let top = 0; top < meta.height; top += sliceH) {
         const h = Math.min(sliceH, meta.height - top);
         const name = `page-${String(++n).padStart(2, "0")}.webp`;
-        const info = await sharp(file, { limitInputPixels: false })
+        const info = await sharp(img, { limitInputPixels: false })
           .extract({ left: 0, top, width: meta.width, height: h })
           .webp({ quality: 80, smartSubsample: true })
           .toFile(path.join(target, name));
         entry.pages.push({ w: info.width, h: info.height, slice: sliceH !== meta.height });
       }
     }
+
     // no thumbnail supplied -> crop one from the top of the first page
-    if (!hadThumb && pages.length) {
-      const file = path.join(tmp, pages[0]);
-      const meta = await sharp(file, { limitInputPixels: false }).metadata();
+    if (!thumb && pages.length) {
+      const img = await sharp(pages[0], { limitInputPixels: false }).resize({ width: 2200 }).png().toBuffer();
+      const meta = await sharp(img).metadata();
       const h = Math.min(meta.height, Math.round(meta.width * 0.585));
-      const info = await sharp(file, { limitInputPixels: false })
+      const info = await sharp(img)
         .extract({ left: 0, top: 0, width: meta.width, height: h })
         .resize({ width: 1600 }).webp({ quality: 82 })
         .toFile(path.join(target, "thumb.webp"));

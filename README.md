@@ -38,7 +38,7 @@ Case studies are deep-linkable: `/#case/oralease`.
 ## Adding a case study on GitHub (no setup needed)
 
 1. On github.com open `source-assets/case-studies/` → **Add file → Upload files**.
-2. Drag in your PDF. Name the folder in the path, e.g. upload into `tech-canvas/` so it lands at
+2. Drag in your PDF (one PDF, or several like `1.pdf` … `6.pdf`, or images `1.png` … — used in number order). Name the folder in the path, e.g. upload into `tech-canvas/` so it lands at
    `source-assets/case-studies/tech-canvas/case-study.pdf` (optionally add a `thumbnail.png`/`.jpg`).
    Commit to `main`.
 3. The **Build case study pages** action (Actions tab) converts it into web pages at 2200 px,

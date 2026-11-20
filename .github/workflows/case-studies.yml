@@ -45,7 +45,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A public src/data/generated.json
           # the raw PDFs and thumbnails are large and no longer needed once converted
-          git ls-files -z 'source-assets/case-studies/*/*.pdf' 'source-assets/case-studies/*/*.PDF' 'source-assets/case-studies/*/thumb*' \
+          git ls-files -z 'source-assets/case-studies/*/*.pdf' 'source-assets/case-studies/*/*.PDF' \
+            'source-assets/case-studies/*/*.png' 'source-assets/case-studies/*/*.jpg' 'source-assets/case-studies/*/*.jpeg' \
+            'source-assets/case-studies/*/*.webp' 'source-assets/case-studies/*/*.PNG' 'source-assets/case-studies/*/*.JPG' \
             | xargs -0 -r git rm -q --
           if git diff --cached --quiet; then
             echo "Nothing new to commit."
