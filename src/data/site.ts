@@ -115,7 +115,22 @@ const caseMeta: Omit<CaseStudy, "thumb" | "pages">[] = [
   },
 ];
 
-export const caseStudies: CaseStudy[] = caseMeta.map((m) => {
+// a folder uploaded without an entry above still shows up, with placeholder details
+const titleCase = (slug: string) => slug.replace(/[-_]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+const extraMeta: Omit<CaseStudy, "thumb" | "pages">[] = Object.keys(gen.caseStudies)
+  .filter((slug) => !caseMeta.some((m) => m.slug === slug) && gen.caseStudies[slug].pages.length > 0)
+  .map((slug) => ({
+    slug,
+    title: titleCase(slug),
+    client: titleCase(slug),
+    industry: "—",
+    deliverable: "Case Study",
+    year: String(new Date().getFullYear()),
+    summary: "",
+    accent: "#3a3a38",
+  }));
+
+export const caseStudies: CaseStudy[] = [...caseMeta, ...extraMeta].map((m) => {
   const g = gen.caseStudies[m.slug];
   return {
     ...m,

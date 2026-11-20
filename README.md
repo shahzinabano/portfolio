@@ -34,3 +34,19 @@ is in `src/data/site.ts`. To add a new case study, add a folder in `source-asset
 and a matching entry in `caseMeta` in that file.
 
 Case studies are deep-linkable: `/#case/oralease`.
+
+## Adding a case study on GitHub (no setup needed)
+
+1. On github.com open `source-assets/case-studies/` → **Add file → Upload files**.
+2. Drag in your PDF. Name the folder in the path, e.g. upload into `tech-canvas/` so it lands at
+   `source-assets/case-studies/tech-canvas/case-study.pdf` (optionally add a `thumbnail.png`/`.jpg`).
+   Commit to `main`.
+3. The **Build case study pages** action (Actions tab) converts it into web pages at 2200 px,
+   slices long pages, makes a thumbnail if you didn't upload one, commits the result and removes
+   the raw upload. Vercel then redeploys on its own — a few minutes in total.
+4. A brand-new folder shows up on the site straight away, titled after the folder name. To give it
+   a proper title, industry and summary, edit the `caseMeta` list in `src/data/site.ts` (pencil
+   icon on GitHub) and add an entry whose `slug` is the folder name.
+
+GitHub's website accepts files up to **25 MB**. Compress a bigger PDF first (Acrobat
+"Reduce File Size", or ilovepdf.com), or upload it with GitHub Desktop (up to 100 MB).

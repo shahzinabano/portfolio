@@ -22,7 +22,11 @@ const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const src = path.join(root, "source-assets");
 const pub = path.join(root, "public");
 const IMG = /\.(png|jpe?g|webp|avif)$/i;
-const out = { caseStudies: {}, work: [], hero: null, about: null };
+// start from the previous results, so anything without new source files is kept as is
+// (raw PDFs are not stored in the repo, so most case studies have nothing to rebuild)
+const genFile = path.join(root, "src", "data", "generated.json");
+const prev = fs.existsSync(genFile) ? JSON.parse(fs.readFileSync(genFile, "utf8")) : {};
+const out = { caseStudies: { ...(prev.caseStudies ?? {}) }, work: prev.work ?? [], hero: prev.hero ?? null, about: prev.about ?? null };
 
 const ensure = (d) => fs.mkdirSync(d, { recursive: true });
 
@@ -40,18 +44,25 @@ for (const slug of fs.existsSync(csDir) ? fs.readdirSync(csDir) : []) {
   const dir = path.join(csDir, slug);
   if (!fs.statSync(dir).isDirectory()) continue;
   const target = path.join(pub, "case-studies", slug);
-  fs.rmSync(target, { recursive: true, force: true });
-  ensure(target);
   const files = fs.readdirSync(dir);
-  const entry = { pages: [], thumb: null };
-
   const thumb = files.find((f) => /^thumb/i.test(f) && IMG.test(f));
+  const pdf = files.find((f) => f.toLowerCase().endsWith(".pdf"));
+  if (!thumb && !pdf) {
+    console.log(`case study ${slug}: no new files, kept as is`);
+    continue;
+  }
+  ensure(target);
+  const entry = { pages: out.caseStudies[slug]?.pages ?? [], thumb: out.caseStudies[slug]?.thumb ?? null };
+
   if (thumb) {
     entry.thumb = await toWebp(path.join(dir, thumb), path.join(target, "thumb.webp"), 1600);
   }
 
-  const pdf = files.find((f) => f.toLowerCase().endsWith(".pdf"));
   if (pdf) {
+    // replace the old pages of this case study only
+    for (const f of fs.readdirSync(target)) if (/^page-\d+\.webp$/.test(f)) fs.rmSync(path.join(target, f));
+    entry.pages = [];
+    const hadThumb = Boolean(thumb);
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), `cs-${slug}-`));
     execFileSync("pdftoppm", ["-scale-to-x", "2200", "-scale-to-y", "-1", "-png", path.join(dir, pdf), path.join(tmp, "p")]);
     const pages = fs.readdirSync(tmp).filter((f) => f.endsWith(".png")).sort();
@@ -72,7 +83,7 @@ for (const slug of fs.existsSync(csDir) ? fs.readdirSync(csDir) : []) {
       }
     }
     // no thumbnail supplied -> crop one from the top of the first page
-    if (!entry.thumb && pages.length) {
+    if (!hadThumb && pages.length) {
       const file = path.join(tmp, pages[0]);
       const meta = await sharp(file, { limitInputPixels: false }).metadata();
       const h = Math.min(meta.height, Math.round(meta.width * 0.585));
@@ -94,6 +105,7 @@ if (fs.existsSync(workDir)) {
   const target = path.join(pub, "work");
   fs.rmSync(target, { recursive: true, force: true });
   ensure(target);
+  out.work = [];
   for (const f of fs.readdirSync(workDir).filter((f) => IMG.test(f)).sort()) {
     const name = f.replace(IMG, ".webp");
     const size = await toWebp(path.join(workDir, f), path.join(target, name), 1400);
